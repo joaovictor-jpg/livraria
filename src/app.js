@@ -9,13 +9,15 @@ const livros = [
         titulo: "O Senhor dos Anéis"
     },
     {
-        id: 1,
+        id: 2,
         titulo: "O Hobbit"
     }
 ]
 
-function bucarPorId(id) {
-    return livros.findIndex(livro => livro.id === Number(id));
+function buscarPorId(id) {
+    return livros.findIndex(livro => {
+        return livro.id === Number(id);
+    });
 };
 
 app.get("/", (req, res) => {
@@ -27,7 +29,7 @@ app.get("/livros", (req, res) => {
 });
 
 app.get("/livros/:id", (req, res) => {
-    const index = bucarPorId(req.params.id);
+    const index = buscarPorId(req.params.id);
     res.status(200).json(livros[index]);
 });
 
@@ -37,9 +39,15 @@ app.post("/livros", (req, res) => {
 });
 
 app.put("/livros/:id", (req, res) => {
-    const index = bucarPorId(req.params.id);
+    const index = buscarPorId(req.params.id);
     livros[index].titulo = req.body.titulo;
     res.status(200).json(livros[index]);
+});
+
+app.delete("/livros/:id", (req, res) => {
+    const index = buscarPorId(req.params.id);
+    livros.splice(index, 1);
+    res.status(200).send('Livro removido com sucesso.');
 });
 
 export default app;
