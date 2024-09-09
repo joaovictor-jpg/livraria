@@ -1,5 +1,5 @@
 
-# Nome do projeto
+# Livraria
 
 <img src="projeto.png" alt="Exemplo imagem">
 
