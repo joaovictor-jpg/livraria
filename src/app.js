@@ -16,22 +16,6 @@ const app = express();
 
 routes(app);
 
-app.get("/livros/:id", (req, res) => {
-    const index = buscarPorId(req.params.id);
-    res.status(200).json(livros[index]);
-});
-
-app.post("/livros", (req, res) => {
-    livros.push(req.body);
-    res.status(201).send("Livro Criado com sucesso!");
-});
-
-app.put("/livros/:id", (req, res) => {
-    const index = buscarPorId(req.params.id);
-    livros[index].titulo = req.body.titulo;
-    res.status(200).json(livros[index]);
-});
-
 app.delete("/livros/:id", (req, res) => {
     const index = buscarPorId(req.params.id);
     livros.splice(index, 1);
